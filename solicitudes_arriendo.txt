@@ -1,0 +1,6 @@
+(1, 'casa1', 'calle1', 'single-property.jpg', 1222222, True, 122, 122, 2, 3, 2, 'casa', 1, 2, 'Es un hecho establecido hace demasiado tiempo que un lector se distraerá con el contenido del texto de un sitio mientras que mira su diseño. El punto de usar Lorem Ipsum es que tiene una distribución más o menos normal de las letras, al contrario de')
+(2, 'casa2', 'calle1', 'single-property_juRersY.jpg', 344444444, True, 122, 433, 2, 4, 2, 'casa', 1, 2, 'casa2asjhdgasjkdghasjkdgasjkdgasjkdgasjkdgashjdk')
+(3, 'casa3', 'calle1', 'single-property_4YIclrX.jpg', 132312312, True, 122, 333, 2, 3, 2, 'casa', 1, 2, 'casa2')
+(4, 'casa4', 'calle1', 'single-property_FPbcNL0.jpg', 555555, True, 34, 43, 3, 4, 3, 'casa', 1, 2, 'casa2asjhdgasjkdghasjkdgasjkdgasjkdgasjkdgashjdk')
+(5, 'casa5', 'calle1', 'single-property_4zXq3vt.jpg', 23333, True, 223, 233, 2, 3, 4, 'casa', 1, 2, 'casa2asjhdgasjkdghasjkdgasjkdgasjkdgasjkdgashjdk')
+(6, 'parcela', 'calle1', 'single-property_9XeTltA.jpg', 132313, True, 1233, 5000, 2, 2, 2, 'parcela', 1, 2, 'ultra waii')

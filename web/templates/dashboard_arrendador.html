@@ -1,0 +1,67 @@
+{% extends "base.html" %}
+{% block content %}
+  {% if user.tipo_usuario == 'arrendador' %}
+
+  <div class="text-center mb-3">
+    <h2>Tus Inmuebles</h2> 
+  </div>
+  <section class="container mx-auto pt-5">
+    <div class="row row-cols-1 row-cols-md-3 row-cols-lg-5 g-4">
+      {% for inm in inmuebles %}
+        <div class="col">
+          <div class="card h-100">
+              <img class="card-img-top" src="/media/{{inm.imagen}}" alt="Card image cap">
+            </a>
+            <div class="card-body">
+              <h5 class="card-title">{{ inm.nombre }}</h5>
+              <div class="alert {% if inm.disponible %}alert-success{% else %}alert-danger{% endif %}">
+                <p>Estado: {% if inm.disponible %}Disponible{% else %}No disponible{% endif %}</p>
+              </div>
+              <p class="card-text text-justify">
+                  {% if inm.descripcion|length > 100 %}
+                      {{ inm.descripcion|slice:":100" }}... <a href="">descripcion</a>
+                  {% else %}
+                      {{ inm.descripcion}}
+                  {% endif %}
+              </p>
+          </div>
+            <div class="card-footer">
+              <a class="btn btn-primary" href="{% url 'detalle' inm.id %}">Detalles</a>
+              <a class="btn btn-danger" href="{% url 'eliminar_inmueble' inm.id %}" onclick="return confirm('¿Seguro que quieres eliminar este inmueble?');">Eliminar</a>
+            </div>
+          </div>
+        </div>
+      {% endfor %}  
+    </div>
+  </section>
+
+  <div class="text-center my-4">
+     <h2>Solicitudes Recibidas</h2>
+  </div>
+  
+  <section class="container mx-auto pt-5">
+      <div class="row row-cols-1 row-cols-md-3 row-cols-lg-4 g-4">
+          {% for solicitud in solicitudes_recibidas %}
+          <div class="card text-bg-tertiary mb-3" style="max-width: 18rem;">
+                  <div class="card-header alert alert-warning mt-2">{{solicitud.estado}}</div>
+                  <div class="card-body">
+                      <h6 class="card-title">{{ solicitud }}</h6>
+                      <p class="mb-3">{{solicitud.mensaje}}</p>
+                      {% if solicitud.estado != 'aceptado' %}
+                          <form method="post" action="{% url 'cambiar_estado_solicitud' solicitud.id %}">
+                              {% csrf_token %}
+                              <select class="form-select" name="nuevo_estado">
+                                  <option value="pendiente">Pendiente</option>
+                                  <option value="aceptado">Aceptado</option>
+                                  <option value="rechazado">Rechazado</option>
+                              </select>
+                              <button class="btn btn-success mt-3" type="submit">Cambiar Estado</button>
+                          </form>
+                      {% endif %}
+                  </div>
+              </div>
+          {% endfor %}
+      </div>
+  </section>
+  {% endif %}
+{% endblock %}

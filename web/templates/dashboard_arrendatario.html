@@ -1,0 +1,117 @@
+{% extends 'base.html' %}
+{% load static %}
+
+{% block content %}
+
+  <div class="text-center my-3">
+    <h2>Dashboard - Arrendatario</h2>
+  </div>
+
+  <div class="container mb-5 mx-auto">
+
+    <form class="row g-3" method="GET" action="{% url 'dashboard' %}">
+      <div class="col-auto">
+        <label for="region" class="visually-hidden">Región:</label>
+        <select class="form-control" name="region" id="region">
+          <option value="0">Seleccionar Región</option>
+          {% for region in regiones %}
+            <option value="{{ region.id }}">{{ region.nombre }}</option>
+          {% endfor %}
+        </select>
+      </div>
+      <div class="col-auto">
+        <label for="comuna" class="visually-hidden">Comuna:</label>
+        <select class="form-control" name="comuna" id="comuna">
+          <option value="0">Seleccionar Comuna</option>
+          {% for comuna in comunas %}
+            <option value="{{ comuna.id }}">{{ comuna.nombre }}</option>
+          {% endfor %}
+        </select>
+      </div>
+      <div class="col-auto">
+        <button class="btn btn-primary" type="submit">Filtrar</button>
+      </div>
+    </form>
+
+  </div>
+
+  <div class="text-center mb-3">
+    <h3>Inmuebles Disponibles:</h3>
+  </div>
+
+  <ul>
+    <section class="container mx-auto pt-5">
+      <div class="row row-cols-1 row-cols-md-3 row-cols-lg-4 g-4">
+        {% for inm in inmuebles %}
+          <div class="col">
+            <div class="card h-100">
+                <img class="card-img-top" src="/media/{{inm.imagen}}" alt="Card image cap">
+              </a>
+              <div class="card-body">
+                <h5 class="card-title">
+                  <span class="p-1 me-2 text-primary bg-primary-subtle border border-primary-subtle rounded-3">
+                    {{ inm.tipo_de_inmueble }}
+                  </span><hr>
+                  {{ inm.nombre }}
+                </h5>
+                <p class="card-text text-justify">
+                    {% if inm.descripcion|length > 50 %}
+                        {{ inm.descripcion|slice:":50" }}... <a href="">descripcion</a>
+                    {% else %}
+                        {{ inm.descripcion}}
+                    {% endif %}
+                </p>
+              </div>
+              <div class="card-footer">
+                <a class="btn btn-primary" href="{% url 'detalle' inm.id %}">Detalles</a>
+                <a class="btn btn-success" href="{% url 'generar_solicitud_arriendo' inm.id %}">Solicitar Arriendo</a>
+              </div>
+            </div>
+          </div>
+        {% endfor %}
+      </div>
+    </section>
+  </ul>
+
+  <div class="text-center my-4 pt-4">
+    <h3>Mis Solicitudes de Arriendo:</h3>
+  </div>
+
+  <section class="container mx-auto pt-5">
+
+    <div class="row row-cols-1 row-cols-md-3 row-cols-lg-4 g-4">
+
+      {% for solicitud in solicitudes %}
+        <!---Inicio Div Card-->
+        <div class="card mb-3" style="max-width: 18rem;">
+        <!---Fin Div Card (declaración de clases)-->
+
+          <div class="card-header mt-2
+            {% if solicitud.estado == 'aceptado' %}bg-success
+            {% elif solicitud.estado == 'pendiente' %}bg-warning
+            {% elif solicitud.estado == 'rechazado' %}bg-danger
+            {% else %}bg-secondary{% endif %}
+          ">
+            {{solicitud.estado}}
+          </div>
+
+          <div class="card-body">
+            <h5 class="card-title">{{ solicitud }}</h5>
+            <P>{{solicitud.mensaje}}</P>
+          </div>
+
+          <div class="card-footer">
+            <form action="{% url 'cancelar_solicitud' solicitud.id %}" method="post">
+              {% csrf_token %}
+              <button type="submit" class="btn btn-danger" {% if solicitud.estado != 'pendiente' %}disabled{% endif %}>Cancelar Solicitud</button>
+            </form>
+          </div>
+
+        </div> <!---Fin Div Card-->
+      {% endfor %}
+
+    </div>
+
+  </section>
+
+{% endblock %}

@@ -1,0 +1,78 @@
+  {% load static %}
+  <div class="sub-header">
+    <div class="container">
+      <div class="row">
+        <div class="col-lg-8 col-md-8">
+          <ul class="info">
+            <li><i class="fa fa-envelope"></i> info@company.com</li>
+            <li><i class="fa fa-map"></i> Sunny Isles Beach, FL 33160</li>
+          </ul>
+        </div>
+        <div class="col-lg-4 col-md-4">
+          <ul class="social-links">
+            <li><a href="#"><i class="fab fa-facebook"></i></a></li>
+            <li><a href="https://x.com/minthu" target="_blank"><i class="fab fa-twitter"></i></a></li>
+            <li><a href="#"><i class="fab fa-linkedin"></i></a></li>
+            <li><a href="#"><i class="fab fa-instagram"></i></a></li>
+              {%   if user.is_authenticated %}
+                <p class="d-inline">bienvenido {{ user.username }}</p>        
+                <form action="{% url 'logout' %}" method="post">
+                  {% csrf_token %}
+                  <button data-mdb-ripple-init type="submit" class="btn btn-outline">
+                    cerrar sesión
+                </button>
+              </form>
+              {% else %}
+                <a class="nav-link" href="{% url 'login' %}">Iniciar sesión</a>                        
+                <a class="nav-link" href="{% url 'registro_usuario' %}">Registro</a>
+              {% endif %}
+          </ul>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- ***** Header Area Start ***** -->
+  <header class="header-area header-sticky">
+    <div class="container">
+        <div class="row">
+            <div class="col-12">
+                <nav class="main-nav">
+                    <!-- ***** Logo Start ***** -->
+                    <a href="{% url 'home' %}" class="logo">
+                        <h2>Portal Inmobiliario</h2>
+                    </a>
+                    <!-- ***** Logo End ***** -->
+                    <!-- ***** Menu Start ***** -->                    
+                    <ul class="nav">        
+                      <li><a class="nav-link d-inline" href="{% url 'home' %}">Home</a></li>
+                      {% if user.is_authenticated %}
+                      <li><a class="nav-link d-inline" href="{% url 'dashboard' %}">Dashboard</a></li>
+                      <li><a class="nav-link d-inline" href="{% url 'actualizar_usuario' %}">Perfil</a></li>
+ 
+                      {% endif %}
+                                            
+                      {% if user.is_authenticated and user.tipo_usuario == 'arrendador' %}
+                      <li><a class="nav-link d-inline" href="{% url 'alta_inmueble' %}">Crear inmueble</a></li>
+                      
+
+
+                      {% endif %}
+                      {% comment %} <li><a href="property-details.html">Property Details</a></li>
+                      <li><a href="contact.html">Contact Us</a></li>
+                      <li><a href="#"><i class="fa fa-calendar"></i> Schedule a visit</a></li>
+                  </ul>    {% endcomment %}
+                    <a class='menu-trigger'>
+                        <span>Menu</span>
+                    </a>
+                    <!-- ***** Menu End ***** -->
+                </nav>
+            </div>
+        </div>
+    </div>
+  </header>
+
+
+
+  
+  <!-- ***** Header Area End ***** -->

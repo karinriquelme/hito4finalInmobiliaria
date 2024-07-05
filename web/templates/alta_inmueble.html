@@ -1,0 +1,180 @@
+{% extends 'base.html' %}
+
+{% block title %}Crear Inmueble{% endblock %}
+
+{% block content %}
+
+<div class="container">
+
+    <div class="text-center my-3">
+        <h2>Alta de Inmueble</h2>
+    </div>
+
+    <form method="POST" enctype="multipart/form-data">
+        {% csrf_token %}
+        <div class="mb-3">
+            <label for="nombre" class="form-label">Nombre</label>
+            <input type="text" class="form-control" id="nombre" name="nombre">
+        </div>
+
+        <div class="mb-3">
+            <label for="direccion" class="form-label">Dirección</label>
+            <input type="text" class="form-control" id="direccion" name="direccion">
+        </div>
+
+        <div class="mb-3">
+            <label for="descripcion" class="form-label">Descripción</label>
+            <textarea class="form-control" id="descripcion" name="descripcion" rows="3"></textarea>
+            <!--input type="text" class="form-control" id="descripcion" name="descripcion"-->
+        </div>
+
+        <div class="mb-3">
+            <label for="imagen" class="form-label">Imágen</label>
+            <input class="form-control" type="file" id="imagen" name="imagen">
+        </div>
+
+        <div class="mb-3">
+
+            <div class="row">
+
+                <div class="col-12 col-md-6">
+
+                    <label for="region" class="form-label">Region</label>
+                    <select class="form-select" aria-label="Region select" id="region" name="region" onchange="loadComunas()">
+                        <option value="0" selected>Region</option>
+                        {% for region in regiones %}
+                            <option value="{{ region.id }}">{{ region.nombre }}</option>
+                        {% endfor %}
+                    </select>
+
+                </div>
+
+                <div class="col-12 col-md-6">
+
+                    <label for="comuna" class="form-label">Comuna</label>
+                    <select class="form-select" aria-label="Comuna select" id="comuna" name="comuna">
+                        <option value="0" selected>Comuna</option>
+                        {% for comuna in comunas %}
+                            <option value="{{ comuna.id }}">{{ comuna.nombre }}</option>
+                        {% endfor %}
+                    </select>
+
+                </div>
+
+            </div>
+
+        </div>
+
+        <div class="mb-3">
+
+            <div class="row">
+
+                <div class="col-12 col-md-6">
+                    <label for="m2_construidos" class="form-label">M2 Construidos</label>
+                    <input type="text" class="form-control" id="m2_construidos" name="m2_construidos">
+                </div>
+
+                <div class="col-12 col-md-6">
+                    <label for="m2_terreno" class="form-label">M2 Terreno</label>
+                    <input type="text" class="form-control" id="m2_terreno" name="m2_terreno">
+                </div>
+
+            </div>
+        </div>
+
+        <div class="mb-3">
+
+            <div class="row">
+
+                <div class="col-12 col-md-4">
+                    <label for="cantidad_estacionamientos" class="form-label">Cantidad Estacionamientos</label>
+                    <input type="text" class="form-control" id="cantidad_estacionamientos" name="cantidad_estacionamientos">
+                </div>
+
+                <div class="col-12 col-md-4">
+                    <label for="cantidad_habitaciones" class="form-label">Cantidad Habitaciones</label>
+                    <input type="text" class="form-control" id="cantidad_habitaciones" name="cantidad_habitaciones">
+                </div>
+
+                <div class="col-12 col-md-4">
+                    <label for="cantidad_banos" class="form-label">Cantidad Baños</label>
+                    <input type="text" class="form-control" id="cantidad_banos" name="cantidad_banos">
+                </div>
+
+            </div>
+
+        </div>
+
+        <div class="mb-3">
+
+            <div class="row">
+
+                <div class="col-12 col-md-4">
+                    <label for="tipo_de_inmueble" class="form-label">Tipo de Inmueble</label>
+                    <select class="mb-3 form-select" aria-label="Tipo de Inmueble select" id="tipo_de_inmueble" name="tipo_de_inmueble">
+                        <option selected>Tipo de Inmueble</option>
+                        <option value="casa">Casa</option>
+                        <option value="departamento">Departamento</option>
+                        <option value="parcela">Parcela</option>
+                    </select>
+                </div>
+
+                <div class="col-12 col-md-4">
+                    <label for="precio" class="form-label">Precio</label>
+                    <input type="text" class="form-control" id="precio" name="precio">
+                </div>
+
+                <div class="col-12 col-md-4 form-check pt-5">
+                    <input type="checkbox" class="form-check-input" id="disponible" name="disponible" checked>
+                    <label class="form-check-label" for="disponible">Disponible</label>
+                </div>
+
+            </div>
+
+        </div>
+
+        <div class="d-inline-row">
+            <button class="btn btn-primary" type="submit">Guardar</button>
+            <a class="btn btn-secondary" href="{% url 'dashboard' %}">Volver</a>
+        </div>
+    </form>
+
+</div>
+
+<!-- <script>
+
+    function getCookie(name) {
+
+        var cookieValue = null;
+        if (document.cookie && document.cookie != '') {
+            var cookies = document.cookie.split(';');
+            for (var i = 0; i < cookies.length; i++) {
+                var cookie = jQuery.trim(cookies[i]);
+                if (cookie.substring(0, name.length + 1) == (name + '=')) {
+                cookieValue = decodeURIComponent(cookie.substring(name.length + 1));
+                    break;
+                }
+            }
+        }
+        //RETORNANDO EL TOKEN
+        return cookieValue;
+  
+    }//end function getCookie
+
+    function loadComunas() {
+        let region_id = $('#region').val();
+        let csrftoken = getCookie('csrftoken');
+        if (region_id !== '0') {
+            $.ajax({
+                type: 'POST',
+                url: '{% url 'alta_inmueble' %}',
+                data: {csrfmiddlewaretoken: csrftoken,'region_id': region_id},
+                success: function (data) {
+                }
+            });
+        }
+    }
+
+</script> -->
+
+{% endblock %}

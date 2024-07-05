@@ -1,0 +1,59 @@
+{% extends 'base.html' %}
+
+{% block title %}Solicitar Arriendo{% endblock %}
+{% load static %}
+{% block content %}
+
+    <div class="container">
+
+        <div class="text-center my-3">
+            <h1>Generar Solicitud de Arriendo</h1>
+        </div>
+
+        <div class="text-center my-3">
+
+            <form method="post">
+                {% csrf_token %}
+
+                <div class="mb-3">
+
+                    <div class="d-inline-row">
+
+                        <h4 class="text-primary">
+                            <span>Tipo de Inmueble: {{ inmueble.tipo_de_inmueble }}</span>
+                            <span class="ms-5">Nombre: {{ inmueble.nombre }}</span>
+                        </h4>
+
+                    </div>
+
+                </div>
+
+                <div class="mb-3">
+
+                    <div class="d-inline-flex">
+
+                        <div class="col-4 mt-5">
+                            <img src="/media/{{ inmueble.imagen }}" width="100px">
+                        </div>
+
+                        <div class="col-8 ms-3">
+                            <label for="mensaje" class="form-label mb-1"><strong>Mensaje</strong></label>
+                            <textarea class="form-control" name="mensaje" id="mensaje" rows="10"></textarea>
+                        </div>
+
+                    </div>
+                </div>
+
+                <div class="d-inline-flex">
+                    <input type="hidden" name="inmueble" id="inmueble" value="{{ inmueble.id }}">
+                    <input type="hidden" name="estado" id="estado" value="pendiente">
+                    <button class="btn btn-primary" type="submit">Enviar Solicitud</button>
+                    <a class="btn btn-secondary ms-4" href="{% url 'dashboard' %}">Cancelar</a>
+                </div>
+            </form>
+
+        </div>
+
+    </div>
+
+{% endblock %}

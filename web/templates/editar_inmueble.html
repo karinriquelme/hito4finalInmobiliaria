@@ -1,0 +1,202 @@
+{% extends "base.html" %}
+
+{% block title %}Editar Inmueble{% endblock %}
+
+{% block content %}
+
+    <div class="text-center my-4">
+        <h2>Editar Inmueble</h2>
+    </div>
+
+    <div class="container">
+
+        <form method="POST" enctype="multipart/form-data">
+            {% csrf_token %}
+
+            <div class="mb-3">
+                <label for="id_nombre" class="form-label">Nombre</label>
+                <input type="text" class="form-control" id="id_nombre" name="nombre" value="{{form.nombre.value}}">
+            </div>
+
+            <div class="mb-3">
+                <label for="id_direccion" class="form-label">Dirección</label>
+                <input type="text" class="form-control" id="id_direccion" name="direccion" value="{{form.direccion.value}}">
+            </div>
+
+            <div class="mb-3">
+                <label for="id_descripcion" class="form-label">Descripción</label>
+                <textarea class="form-control" id="id_descripcion" name="descripcion" rows="3">{{form.descripcion.value}}</textarea>
+                <!--input type="text" class="form-control" id="descripcion" name="descripcion"-->
+            </div>
+
+            <div class="mb-3">
+
+                <div class="row">
+
+                    <div class="col-12 col-md-8">
+
+                        <label for="id_imagen" class="form-label">Imágen</label>
+                        <input class="form-control" type="file" id="id_imagen" name="imagen">
+
+                    </div>
+
+                    <div class="col-12 col-md-2">
+                        <img src="/media/{{form.imagen.value}}" width="10px">
+                    </div>
+
+                    <div class="col-12 col-md-2">
+                        <input type="checkbox" class="form-check-input" id="id_eliminar_imagen" name="eliminar_imagen">
+                        <label class="form-check-label" for="id_eliminar_imagen">Eliminar</label>
+                    </div>
+
+                </div>
+            </div>
+
+            <div class="mb-3">
+
+                <div class="row">
+
+                    <div class="col-12 col-md-6">
+
+                        <label for="id_region" class="form-label">Region</label>
+                        <select class="form-select" aria-label="Region select" id="id_region" name="region">
+                            <option value="0" selected>Region</option>
+                            {% for region in regiones %}
+                                <option value="{{ region.id }}">{{ region.nombre }}</option>
+                            {% endfor %}
+                        </select>
+
+                    </div>
+
+                    <div class="col-12 col-md-6">
+
+                        <label for="id_comuna" class="form-label">Comuna</label>
+                        <select class="form-select" aria-label="Comuna select" id="id_comuna" name="comuna">
+                            <option value="0" selected>Comuna</option>
+                            {% for comuna in comunas %}
+                                <option value="{{ comuna.id }}" {% if comuna.id == form.comuna.value %} selected{% endif %}>{{ comuna.nombre }}</option>
+                            {% endfor %}
+                        </select>
+
+                    </div>
+
+                </div>
+
+            </div>
+
+            <div class="mb-3">
+
+                <div class="row">
+
+                    <div class="col-12 col-md-6">
+                        <label for="id_m2_construidos" class="form-label">M2 Construidos</label>
+                        <input type="text" class="form-control" id="id_m2_construidos" name="m2_construidos" value="{{form.m2_construidos.value}}">
+                    </div>
+
+                    <div class="col-12 col-md-6">
+                        <label for="id_m2_terreno" class="form-label">M2 Terreno</label>
+                        <input type="text" class="form-control" id="id_m2_terreno" name="m2_terreno" value="{{form.m2_terreno.value}}">
+                    </div>
+
+                </div>
+            </div>
+
+            <div class="mb-3">
+
+                <div class="row">
+
+                    <div class="col-12 col-md-4">
+                        <label for="id_cantidad_estacionamientos" class="form-label">Cantidad Estacionamientos</label>
+                        <input type="text" class="form-control" id="id_cantidad_estacionamientos" name="cantidad_estacionamientos" value="{{form.cantidad_estacionamientos.value}}">
+                    </div>
+
+                    <div class="col-12 col-md-4">
+                        <label for="id_cantidad_habitaciones" class="form-label">Cantidad Habitaciones</label>
+                        <input type="text" class="form-control" id="id_cantidad_habitaciones" name="cantidad_habitaciones" value="{{form.cantidad_habitaciones.value}}">
+                    </div>
+
+                    <div class="col-12 col-md-4">
+                        <label for="id_cantidad_banos" class="form-label">Cantidad Baños</label>
+                        <input type="text" class="form-control" id="id_cantidad_banos" name="cantidad_banos" value="{{form.cantidad_banos.value}}">
+                    </div>
+
+                </div>
+
+            </div>
+
+            <div class="mb-3">
+
+                <div class="row">
+
+                    <div class="col-12 col-md-4">
+                        <label for="id_tipo_de_inmueble" class="form-label">Tipo de Inmueble</label>
+                        <select class="mb-3 form-select" aria-label="Tipo de Inmueble select" id="id_tipo_de_inmueble" name="tipo_de_inmueble">
+                            <option selected>Tipo de Inmueble</option>
+                            <option value="casa" {% if form.tipo_de_inmueble.value == 'casa' %} selected{% endif %}>Casa</option>
+                            <option value="departamento"{% if form.tipo_de_inmueble.value == 'departamento' %} selected{% endif %}>Departamento</option>
+                            <option value="parcela" {% if form.tipo_de_inmueble.value == 'parcela' %} selected{% endif %}>Parcela</option>
+                        </select>
+                    </div>
+
+                    <div class="col-12 col-md-4">
+                        <label for="id_precio" class="form-label">Precio</label>
+                        <input type="text" class="form-control" id="id_precio" name="precio" value="{{form.precio.value}}">
+                    </div>
+
+                    <div class="col-12 col-md-4 form-check pt-5">
+                        <input type="checkbox" class="form-check-input" id="id_disponible" name="disponible" {% if form.disponible.value %} checked{% endif %}>
+                        <label class="form-check-label" for="id_disponible">Disponible</label>
+                    </div>
+
+                </div>
+
+            </div>
+
+            <div class="d-inline-flex">
+                <button class="btn btn-primary" type="submit">Guardar Cambios</button>
+                <a class="btn btn-secondary ms-4" href="{% url 'dashboard' %}">Volver</a>
+            </div>
+
+        </form>
+
+    </div>
+
+    {% comment %} <script>
+
+        function getCookie(name) {
+
+            var cookieValue = null;
+            if (document.cookie && document.cookie != '') {
+                var cookies = document.cookie.split(';');
+                for (var i = 0; i < cookies.length; i++) {
+                    var cookie = jQuery.trim(cookies[i]);
+                    if (cookie.substring(0, name.length + 1) == (name + '=')) {
+                    cookieValue = decodeURIComponent(cookie.substring(name.length + 1));
+                        break;
+                    }
+                }
+            }
+            //RETORNANDO EL TOKEN
+            return cookieValue;
+
+        }//end function getCookie
+
+        function loadComunas() {
+            event.preventDefault();
+            let region_id = $('#region').val();
+            let id = $('#id').val();
+            let csrftoken = getCookie('csrftoken');
+            if (region_id !== '0') {
+                $.ajax({
+                    type: 'POST',
+                    url: $("#url").val(),
+                    data: {csrfmiddlewaretoken: csrftoken,'region_id': region_id},
+                    success: function (data) {
+                    }
+                });
+            }
+        }
+    
+    </script> {% endcomment %}
+
+{% endblock %}

@@ -1,0 +1,77 @@
+{% extends 'base.html' %}
+
+{% block title %}Página de Inicio{% endblock %}
+{% load static %}
+{% block content %}
+  <div class="section properties" style='height: 700px; overflow-y: auto; overflow-x: hidden;'>
+    <div class="container">
+      <ul class="properties-filter">
+        <li>
+          <a class="is_active" href="#!" data-filter="*">Todos</a>
+        </li>
+        <li>
+          <a href="#!" data-filter=".adv">casas</a>
+        </li>
+        <li>
+          <a href="#!" data-filter=".str">Departamentos</a>
+        </li>
+        <li>
+          <a href="#!" data-filter=".rac">Parcelas</a>
+        </li>
+      </ul>
+
+      <div class="row row-cols-1 row-cols-md-4 g-4 properties-box">
+        {% for inm in inmuebles %}
+
+          <div class="col properties-items {% if inm.tipo_de_inmueble == 'casa' %} adv {% elif inm.tipo_de_inmueble == 'departamento' %} str {% elif inm.tipo_de_inmueble == 'parcela' %} rac {% endif %}">
+            <div class="card h-100">
+
+              <a href="property-details.html">
+                <img src="media/{{inm.imagen}}" class="card-img-top" alt="...">
+              </a>
+
+              <div class="card-body">
+                <h5 class="card-title">{{inm.nombre}}</h5>
+                <h6 class="card-title">
+                  <div class="alert alert-warning p-2">
+                    {{inm.tipo_de_inmueble}}
+                  </div>
+                </h6>
+                <p class="card-text">
+                  {% if inm.descripcion|length > 80 %}
+                    {{ inm.descripcion|slice:":80" }}... <a href="{% url 'detalle' inm.id %}">descripcion</a>
+                  {% else %}
+                    {{ inm.descripcion}}
+                  {% endif %}
+                </p>
+              </div>
+              <div class="card-body">
+                <hr>
+                <ul class="list-group list-group-flush">
+                  <li class="list-group-item">Construido : <span>{{inm.m2_construidos}}</span> (m2)</li>
+                  <li class="list-group-item">Terreno : <span>{{inm.m2_terreno}}</span> (m2)</li>
+                  <li class="list-group-item">Habitaciones: <span>{{ inm.cantidad_habitaciones }}</span></li>
+                  <li class="list-group-item">Baños: <span>{{ inm.cantidad_banos }}</span></li>
+                  <li class="list-group-item">Estacionamientos: <span>{{inm.cantidad_estacionamientos}}</span></li>
+                </ul>
+              </div>
+
+              <div class="card-footer">
+                <div class="d-inline-flex">
+                  <span>
+                    <h5>$ {{ inm.precio|floatformat:'-3g' }}</h5>
+                  </span>
+                  <span class="ms-3">
+                    <a class="btn btn-primary" href="{% url 'detalle' inm.id %}">Detalles</a>
+                  </span>
+                </div>
+              </div>
+
+            </div>
+          </div>
+
+        {% endfor %}
+      </div>
+    </div>
+  </div>
+{% endblock %}

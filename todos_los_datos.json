@@ -1,0 +1,197 @@
+[
+    {
+        "model": "web.usuario",
+        "pk": 1,
+        "fields": {
+            "password": "pbkdf2_sha256$720000$1XoNzp8zjeS97mhECGfYNv$q5ngDsdUKnRBHyiwRFx7i7xzymHWQJMMrpkYenRd4Ow=",
+            "last_login": "2024-05-25T01:17:43.297Z",
+            "is_superuser": true,
+            "username": "admin",
+            "first_name": "",
+            "last_name": "",
+            "email": "",
+            "is_staff": true,
+            "is_active": true,
+            "date_joined": "2024-05-24T01:43:40.073Z",
+            "nombres": "",
+            "apellidos": "",
+            "rut": "",
+            "direccion": "",
+            "telefono": "",
+            "tipo_usuario": "",
+            "correo_electronico": "correo@correo.cl",
+            "groups": [],
+            "user_permissions": []
+        }
+    },
+    {
+        "model": "web.usuario",
+        "pk": 2,
+        "fields": {
+            "password": "pbkdf2_sha256$720000$cuSSRfmTGwOQNjX3O4bocn$G6P4RoaHS6o8/6/OAldZuc/qo1stQgd14aWHhp6uc1w=",
+            "last_login": "2024-05-25T00:36:34.229Z",
+            "is_superuser": false,
+            "username": "arrendador001",
+            "first_name": "",
+            "last_name": "",
+            "email": "",
+            "is_staff": false,
+            "is_active": true,
+            "date_joined": "2024-05-24T01:54:34.144Z",
+            "nombres": "nombre arrendador",
+            "apellidos": "apellido arrendador",
+            "rut": "123456789",
+            "direccion": "calle arrendador",
+            "telefono": "12341234",
+            "tipo_usuario": "arrendador",
+            "correo_electronico": "correoarrendador@gmail.com",
+            "groups": [],
+            "user_permissions": []
+        }
+    },
+    {
+        "model": "web.usuario",
+        "pk": 3,
+        "fields": {
+            "password": "pbkdf2_sha256$720000$cuSSRfmTGwOQNjX3O4bocn$G6P4RoaHS6o8/6/OAldZuc/qo1stQgd14aWHhp6uc1w=",
+            "last_login": "2024-05-25T00:36:34.229Z",
+            "is_superuser": false,
+            "username": "arrendatario001",
+            "first_name": "",
+            "last_name": "",
+            "email": "",
+            "is_staff": false,
+            "is_active": true,
+            "date_joined": "2024-05-24T01:54:34.144Z",
+            "nombres": "nombre arrendatario",
+            "apellidos": "apellido arrendatario",
+            "rut": "123456788",
+            "direccion": "calle arrendatario",
+            "telefono": "12341234",
+            "tipo_usuario": "arrendatario",
+            "correo_electronico": "correoarrendatario@gmail.com",
+            "groups": [],
+            "user_permissions": []
+        }
+    },
+    {
+        "model": "web.inmueble",
+        "pk": 1,
+        "fields": {
+            "nombre": "casa1",
+            "direccion": "calle1",
+            "descripcion": "Es un hecho establecido hace demasiado tiempo que un lector se distraerá con el contenido del texto de un sitio mientras que mira su diseño. El punto de usar Lorem Ipsum es que tiene una distribución más o menos normal de las letras, al contrario de",
+            "imagen": "single-property.jpg",
+            "precio": "1222222",
+            "comuna": 79,
+            "disponible": true,
+            "m2_construidos": "122.00",
+            "m2_terreno": "122.00",
+            "cantidad_estacionamientos": 2,
+            "cantidad_habitaciones": 3,
+            "cantidad_banos": 2,
+            "tipo_de_inmueble": "casa",
+            "propietario": 2
+        }
+    },
+    {
+        "model": "web.inmueble",
+        "pk": 2,
+        "fields": {
+            "nombre": "casa2",
+            "direccion": "calle1",
+            "descripcion": "casa2asjhdgasjkdghasjkdgasjkdgasjkdgasjkdgashjdk",
+            "imagen": "single-property_juRersY.jpg",
+            "precio": "344444444",
+            "comuna": 79,
+            "disponible": true,
+            "m2_construidos": "122.00",
+            "m2_terreno": "433.00",
+            "cantidad_estacionamientos": 2,
+            "cantidad_habitaciones": 4,
+            "cantidad_banos": 2,
+            "tipo_de_inmueble": "casa",
+            "propietario": 2
+        }
+    },
+    {
+        "model": "web.inmueble",
+        "pk": 3,
+        "fields": {
+            "nombre": "casa3",
+            "direccion": "calle1",
+            "descripcion": "casa2",
+            "imagen": "single-property_4YIclrX.jpg",
+            "precio": "132312312",
+            "comuna": 79,
+            "disponible": true,
+            "m2_construidos": "122.00",
+            "m2_terreno": "333.00",
+            "cantidad_estacionamientos": 2,
+            "cantidad_habitaciones": 3,
+            "cantidad_banos": 2,
+            "tipo_de_inmueble": "casa",
+            "propietario": 2
+        }
+    },
+    {
+        "model": "web.inmueble",
+        "pk": 4,
+        "fields": {
+            "nombre": "casa4",
+            "direccion": "calle1",
+            "descripcion": "casa2asjhdgasjkdghasjkdgasjkdgasjkdgasjkdgashjdk",
+            "imagen": "single-property_FPbcNL0.jpg",
+            "precio": "555555",
+            "comuna": 79,
+            "disponible": true,
+            "m2_construidos": "34.00",
+            "m2_terreno": "43.00",
+            "cantidad_estacionamientos": 3,
+            "cantidad_habitaciones": 4,
+            "cantidad_banos": 3,
+            "tipo_de_inmueble": "casa",
+            "propietario": 2
+        }
+    },
+    {
+        "model": "web.inmueble",
+        "pk": 5,
+        "fields": {
+            "nombre": "casa5",
+            "direccion": "calle1",
+            "descripcion": "casa2asjhdgasjkdghasjkdgasjkdgasjkdgasjkdgashjdk",
+            "imagen": "single-property_4zXq3vt.jpg",
+            "precio": "23333",
+            "comuna": 79,
+            "disponible": true,
+            "m2_construidos": "223.00",
+            "m2_terreno": "233.00",
+            "cantidad_estacionamientos": 2,
+            "cantidad_habitaciones": 3,
+            "cantidad_banos": 4,
+            "tipo_de_inmueble": "casa",
+            "propietario": 2
+        }
+    },
+    {
+        "model": "web.inmueble",
+        "pk": 6,
+        "fields": {
+            "nombre": "parcela",
+            "direccion": "calle1",
+            "descripcion": "ultra waii",
+            "imagen": "single-property_9XeTltA.jpg",
+            "precio": "132313",
+            "comuna": 79,
+            "disponible": true,
+            "m2_construidos": "1233.00",
+            "m2_terreno": "5000.00",
+            "cantidad_estacionamientos": 2,
+            "cantidad_habitaciones": 2,
+            "cantidad_banos": 2,
+            "tipo_de_inmueble": "parcela",
+            "propietario": 2
+        }
+    }
+]
